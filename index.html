@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Signature</title>
+    <link rel="stylesheet" href="./css/canvas.css">
+    <link rel="stylesheet" href="./css/popup.css">
+        </head> 
+        <body>
+            <div id="main">
+                <!-- Content -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>Chữ Ký Điện Tử</h1>
+                        </div>
+                    
+            <button id="popup-btn">Click vào ký tên</button>
+            <br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <textarea id="sig-dataUrl" class="form-control" rows="5">URL dữ liệu cho chữ ký của bạn sẽ ở đây!</textarea>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Hiển thị hình ảnh chữ ký của bạn:</h2>
+                    <img id="sig-image" src="" alt="Hiển thị ảnh chữ ký tại đây"/>
+                    <a id="link"></a>
+                </div>
+                <div>
+                    <a id="download" download="sig-image.png"><button class="btn btn-default" type="button" onClick="download()">Tải chữ ký</button></a>
+                </div>
+                
+            </div>
+        </div>
+                <!-- POPUP CONTENT -->
+                
+                <div id="popup" class="popup">
+                    <div class="popup-content">
+                <div class="tile-popup">Ký Tên Điện Tử<a href="#" class="close-btn">(x)</a></div>
+                    <div class="sigPad sig-tab" id="smoothed" align="center">
+                        
+                        <div class="sig sigWrapper">
+                          <div class="typed"></div>
+                          <div class="sig_background"><canvas id= "pad" class="pad" ></canvas></div>
+                          <input type="hidden" name="output-2" class="output">
+                      </div>
+                      <div class="row sigNav">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" id="sig-submitBtn">Lưu chữ ký</button>
+                            <button class="btn btn-default clearButton" id="sig-clearBtn">Xoá chữ ký</button>
+                        </div>
+                        </div>
+                        
+                   </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    <!-- END POPUP CONTENT -->  
+        
+        <!-- Lybrary Javascript --> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
+        <script src="./js/popup.js"></script>
+        <script src="./js/canvas.js"></script>
+        <script src="./assets/numeric-1.2.6.min.js"></script>
+        <script src="./assets/bezier.js"></script>
+        <script src="./js/jquery.signaturepad.js"></script>
+        <script>
+            $(document).ready(function() {
+              $('#smoothed').signaturePad({drawOnly:true, drawBezierCurves:true, lineTop:200});
+            });
+          </script>
+          <script src="./assets/json2.min.js"></script>
+          <script>
+            function download(){
+            var download = document.getElementById("download");
+            var image = document.getElementById("pad").toDataURL("image/png")
+                        .replace("image/png", "image/octet-stream");
+            download.setAttribute("href", image);
+        }
+        </script>
+        
+        </body>
+        
+        </html>
